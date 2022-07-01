@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    static public bool isActivated = true;
 
     // 스피드 조정 변수
     [SerializeField]
@@ -74,17 +75,19 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-
-        IsGround();
-        TryJump();
-        TryRun();
-        TryCrouch();
-        Move();
-        MoveCheck();
-        if (!Inventory.inventoryActivated)
+        if (isActivated && GameManager.canPlayerMove)
         {
-            CameraRotation();
-            CharacterRotation();
+            IsGround();
+            TryJump();
+            TryRun();
+            TryCrouch();
+            Move();
+            MoveCheck();
+            if (!Inventory.inventoryActivated)
+            {
+                CameraRotation();
+                CharacterRotation();
+            } 
         }
     }
 
